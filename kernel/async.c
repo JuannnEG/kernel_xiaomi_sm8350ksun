@@ -54,6 +54,14 @@ asynchronous and synchronous parts of the kernel.
 #include <linux/workqueue.h>
 
 #include "workqueue_internal.h"
+#include <stdio.h>
+
+extern char __stack_chk_guard;
+
+int main() {
+  printf("The value of __stack_chk_guard is %p\n", &__stack_chk_guard);
+  return 0;
+}
 
 static async_cookie_t next_cookie = 1;
 
