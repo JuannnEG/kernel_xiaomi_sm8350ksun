@@ -54,7 +54,7 @@ asynchronous and synchronous parts of the kernel.
 #include <linux/workqueue.h>
 
 #include "workqueue_internal.h"
-#include <stdio.h>
+
 
 extern char __stack_chk_guard;
 
