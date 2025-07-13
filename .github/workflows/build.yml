@@ -21,10 +21,10 @@ jobs:
         sudo apt-get install -y bc bison flex libssl-dev libncurses5-dev libelf-dev python-is-python3
         
     # ★ Añadido: integra KernelSU-Next
-    - name: Integrate KernelSU-Next
-      run: |
-        curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
-
+     - name: Integrate KernelSU-Next
+       run: |
+          curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
+  
 
     # 3) Clonar toolchain Proton-Clang arm64-host
     - name: Fetch clang
@@ -51,5 +51,3 @@ jobs:
       with:
         name: Image.gz-dtb
         path: arch/arm64/boot/Image.gz-dtb
-
-Create build workflow
