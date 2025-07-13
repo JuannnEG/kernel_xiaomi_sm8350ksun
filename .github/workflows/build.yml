@@ -1,37 +1,32 @@
 name: Build Kernel
 
 on:
-  workflow_dispatch:        # se ejecutará solo cuando pulses “Run workflow”
+  workflow_dispatch:    # se ejecutará solo cuando pulses “Run workflow”
 
 jobs:
-  build:
+  build:                # ← 2 espacios más que 'jobs:'
     runs-on: ubuntu-latest
 
     steps:
-    # 1) Descargar tu fork (con submódulos si los tiene)
     - name: Checkout source
       uses: actions/checkout@v3
       with:
         submodules: recursive
 
-    # 2) Instalar dependencias
     - name: Install build deps
       run: |
         sudo apt-get update
-        sudo apt-get install -y bc bison flex libssl-dev libncurses5-dev libelf-dev python-is-python3
-        
-    # ★ Añadido: integra KernelSU-Next
-     - name: Integrate KernelSU-Next
-       run: |
-          curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
-  
+        sudo apt-get install -y bc bison flex libssl-dev \
+          libncurses5-dev libelf-dev python-is-python3
 
-    # 3) Clonar toolchain Proton-Clang arm64-host
     - name: Fetch clang
       run: |
         git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
 
-    # 4) Compilar
+    - name: Integrate KernelSU-Next
+      run: |
+        curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
+
     - name: Build Image.gz-dtb
       run: |
         export ARCH=arm64
@@ -40,12 +35,11 @@ jobs:
         export CROSS_COMPILE=aarch64-linux-gnu-
         export CROSS_COMPILE_ARM32=arm-linux-gnueabi-
         export CC=clang
-        export PYTHON2=python3        # evita los fallos de dtbo
+        export PYTHON2=python3
 
-        make kangaroox-vili_defconfig           # ← cambia si tu defconfig se llama distinto
+        make vili_defconfig          # ← pon aquí tu defconfig exacto
         make -j$(nproc) Image.gz-dtb
 
-    # 5) Publicar el resultado
     - name: Upload Image.gz-dtb
       uses: actions/upload-artifact@v4
       with:
