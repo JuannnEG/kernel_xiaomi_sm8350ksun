@@ -40,6 +40,10 @@ jobs:
         export CC=clang
         export PYTHON2=python3
 
+        set -o pipefail
+        make -j$(nproc) Image.gz-dtb 2>&1 | tee build.log
+        grep -n -E "error:|Error|fatal" build.log | head -n 20
+
         make kangaroox-vili_defconfig          # ← pon aquí tu defconfig exacto
         make -j$(nproc) Image.gz-dtb
 
