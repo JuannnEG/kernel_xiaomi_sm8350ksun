@@ -21,7 +21,7 @@ jobs:
 
     - name: Fetch clang
       run: |
-        git clone --depth=1 https://github.com/tiann/clang-r450784d clang
+        git clone --depth=1 https://github.com/XSans0/WeebX-Clang.git clang
 
     - name: Integrate KernelSU-Next
       run: |
