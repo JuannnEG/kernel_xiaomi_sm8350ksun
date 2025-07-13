@@ -18,6 +18,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y bc bison flex libssl-dev \
           libncurses5-dev libelf-dev python-is-python3
+        sudo apt-get install -y \
+          gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
+          bc bison flex libssl-dev libncurses5-dev libelf-dev python-is-python3
 
     - name: Fetch clang
       run: |
