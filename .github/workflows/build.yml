@@ -21,7 +21,7 @@ jobs:
 
     - name: Fetch clang
       run: |
-        git clone --depth=1 --branch master https://github.com/kdrag0n/proton-clang.git clang
+        git clone --depth=1 https://github.com/tiann/clang-r450784d clang
 
     - name: Integrate KernelSU-Next
       run: |
