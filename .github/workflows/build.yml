@@ -37,7 +37,7 @@ jobs:
         export CC=clang
         export PYTHON2=python3
 
-        make vili_defconfig          # ← pon aquí tu defconfig exacto
+        make kangaroox-vili_defconfig          # ← pon aquí tu defconfig exacto
         make -j$(nproc) Image.gz-dtb
 
     - name: Upload Image.gz-dtb
